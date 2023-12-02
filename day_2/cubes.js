@@ -30,11 +30,8 @@ rl.on('line', line => {
   let hRed = 0
   let hGreen = 0
   let hBlue = 0
-
-  let gRed = 0
-  let gGreen = 0
-  let gBlue = 0
   // possibility state
+  let whichFailed = ''
   let isPossible = true
   console.log(collonSplit[0], { gameIdInt })
   // check sets
@@ -49,10 +46,18 @@ rl.on('line', line => {
             hRed = numRed
           }
           if (isPossible) {
-            console.log('red   ', numRed)
-            gRed = gRed + numRed
+            console.log('red   ', numRed, !isPossible)
             isPossible = numRed <= cubes.red
-            if (!isPossible) console.error('\x1b[31m%s\x1b[0m', 'Failed!')
+            if (!isPossible) {
+              whichFailed = 'RED'
+              console.error(
+                '\x1b[31m%s\x1b[0m',
+                'Failed! ',
+                { numRed },
+                ' > ',
+                { red: cubes.red }
+              )
+            }
           }
           break
         case 'green':
@@ -62,9 +67,17 @@ rl.on('line', line => {
           }
           if (isPossible) {
             console.log('green ', numGreen)
-            gGreen = gGreen + numGreen
             isPossible = numGreen <= cubes.green
-            if (!isPossible) console.error('\x1b[31m%s\x1b[0m', 'Failed!')
+            if (!isPossible) {
+              whichFailed = 'GREEN'
+              console.error(
+                '\x1b[31m%s\x1b[0m',
+                'Failed!',
+                { numGreen },
+                ' > ',
+                { green: cubes.green }
+              )
+            }
           }
           break
         case 'blue':
@@ -74,9 +87,17 @@ rl.on('line', line => {
           }
           if (isPossible) {
             console.log('blue  ', numBlue)
-            gBlue = gBlue + numBlue
             isPossible = numBlue <= cubes.blue
-            if (!isPossible) console.error('\x1b[31m%s\x1b[0m', 'Failed!')
+            if (!isPossible) {
+              whichFailed = 'RED'
+              console.error(
+                '\x1b[31m%s\x1b[0m',
+                'Failed!',
+                { numBlue },
+                ' > ',
+                { blue: cubes.blue }
+              )
+            }
           }
           break
         default:
@@ -93,10 +114,9 @@ rl.on('line', line => {
   }
 
   console.log(
-    'Result of game: ',
-    { gRed, gGreen, gBlue },
-    'is games possible: ',
+    'is game possible: ',
     isPossible,
+    isPossible ? '' : ` ${whichFailed} failed `,
     ' Game Id: ',
     gameIdInt
   )
