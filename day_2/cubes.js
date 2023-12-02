@@ -46,7 +46,7 @@ rl.on('line', line => {
             hRed = numRed
           }
           if (isPossible) {
-            console.log('red   ', numRed, !isPossible)
+            console.log('red   ', numRed)
             isPossible = numRed <= cubes.red
             if (!isPossible) {
               whichFailed = 'RED'
