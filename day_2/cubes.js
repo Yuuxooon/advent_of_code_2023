@@ -89,7 +89,7 @@ rl.on('line', line => {
             console.log('blue  ', numBlue)
             isPossible = numBlue <= cubes.blue
             if (!isPossible) {
-              whichFailed = 'RED'
+              whichFailed = 'BLUE'
               console.error(
                 '\x1b[31m%s\x1b[0m',
                 'Failed!',
