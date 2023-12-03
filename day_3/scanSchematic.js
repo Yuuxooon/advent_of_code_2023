@@ -331,5 +331,3 @@ rl.on('close', () => {
   )
   console.log({ anomalyCount }, { gearRatioSum })
 })
-
-// 550064
