@@ -2,7 +2,7 @@ const fs = require('fs')
 const readLine = require('readline')
 
 // file to load
-const dataStream = fs.createReadStream('./schematic.txt')
+const dataStream = fs.createReadStream('./testCase.txt')
 
 const rl = readLine.createInterface({
   input: dataStream,
